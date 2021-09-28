@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "e-commerce",
-    "slug": "e-commerce",
+    "name": "la-cocina-de-papu",
+    "slug": "la-cocina-de-papu",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,6 +27,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": ""
   }
 }
