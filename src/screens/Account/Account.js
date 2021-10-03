@@ -6,6 +6,9 @@ import { getMeApi } from "../../api/user";
 import useAuth from "../../hooks/useAuth";
 import StatusBar from "../../components/StatusBar";
 import colors from "../../styles/colors";
+import ScreenLoading from "../../components/ScreenLoading";
+import UserInfo from "../../components/Account/UserInfo";
+import Menu from "../../components/Account/Menu";
 
 export default function Account() {
   const [user, setUser] = useState(null);
@@ -23,10 +26,17 @@ export default function Account() {
   return (
     <>
       <StatusBar backgroundColor={colors.bgDark} barStyle="light-content" />
-      <Search />
-      <ScrollView>
-        <Text>Estamos en Mi cuenta</Text>
-      </ScrollView>
+      {!user ? (
+        <ScreenLoading size="large" color="#f00" />
+      ) : (
+        <>
+          <Search />
+          <ScrollView>
+            <UserInfo user={user} />
+            <Menu />
+          </ScrollView>
+        </>
+      )}
     </>
   );
 }
