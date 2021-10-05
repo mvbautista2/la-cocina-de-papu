@@ -39,19 +39,19 @@ export default function Menu() {
           title="Cambiar email"
           description="Cambia el email registrado en la cuenta"
           left={(props) => <List.Icon {...props} icon="at" />}
-          onPress={() => console.log("Ir a cambiar el email")}
+          onPress={() => navigation.navigate("change-email")}
         />
         <List.Item
           title="Cambiar username"
           description="Cambia el nombre de usuario registrado en la cuenta"
           left={(props) => <List.Icon {...props} icon="sim" />}
-          onPress={() => console.log("Ir a cambiar el nombre de usuario")}
+          onPress={() => navigation.navigate("change-username")}
         />
         <List.Item
           title="Cambiar contraseña"
           description="Cambia la contraseña registrada en la cuenta"
           left={(props) => <List.Icon {...props} icon="key" />}
-          onPress={() => console.log("Ir a cambiar la contraseña")}
+          onPress={() => navigation.navigate("change-password")}
         />
         <List.Item
           title="Mis direcciones"

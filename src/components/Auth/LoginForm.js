@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { useFormik } from "formik";
+import { RootSiblingParent } from "react-native-root-siblings";
 import * as Yup from "yup";
 import Toast from "react-native-root-toast";
 import useAuth from "../../hooks/useAuth";
@@ -32,37 +33,39 @@ export default function LoginForm(props) {
   });
   return (
     <View>
-      <TextInput
-        label="Email o usuario"
-        style={formStyles.input}
-        onChangeText={(text) => formik.setFieldValue("identifier", text)}
-        value={formik.values.identifier}
-        error={formik.errors.identifier}
-      />
-      <TextInput
-        label="Contraseña"
-        style={formStyles.input}
-        secureTextEntry
-        onChangeText={(text) => formik.setFieldValue("password", text)}
-        value={formik.values.password}
-        error={formik.errors.password}
-      />
-      <Button
-        mode="contained"
-        style={formStyles.btnSuccess}
-        onPress={formik.handleSubmit}
-        loading={loading}
-      >
-        Iniciar Sesión
-      </Button>
-      <Button
-        mode="text"
-        style={formStyles.btnText}
-        labelStyle={formStyles.btnTextLabel}
-        onPress={changeForm}
-      >
-        Registrarse
-      </Button>
+      <RootSiblingParent>
+        <TextInput
+          label="Email o usuario"
+          style={formStyles.input}
+          onChangeText={(text) => formik.setFieldValue("identifier", text)}
+          value={formik.values.identifier}
+          error={formik.errors.identifier}
+        />
+        <TextInput
+          label="Contraseña"
+          style={formStyles.input}
+          secureTextEntry
+          onChangeText={(text) => formik.setFieldValue("password", text)}
+          value={formik.values.password}
+          error={formik.errors.password}
+        />
+        <Button
+          mode="contained"
+          style={formStyles.btnSuccess}
+          onPress={formik.handleSubmit}
+          loading={loading}
+        >
+          Iniciar Sesión
+        </Button>
+        <Button
+          mode="text"
+          style={formStyles.btnText}
+          labelStyle={formStyles.btnTextLabel}
+          onPress={changeForm}
+        >
+          Registrarse
+        </Button>
+      </RootSiblingParent>
     </View>
   );
 }
