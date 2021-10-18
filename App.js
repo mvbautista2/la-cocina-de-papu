@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { Text, View, Button } from "react-native";
+import { Text, View, Button, LogBox } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import jwtDecode from "jwt-decode";
 import AppNavigation from "./src/navigation/AppNavigation";
@@ -7,6 +7,9 @@ import AuthScreen from "./src/screens/Auth";
 import AuthContext from "./src/context/AuthContext";
 import { setTokenApi, getTokenApi, removeTokenApi } from "./src/api/token";
 export default function App() {
+  LogBox.ignoreLogs([
+    "Found screens with the same name nested inside one another. Check: home, home > home This can cause confusing behavior during navigation. Consider using unique names for each screen instead.",
+  ]);
   const [auth, setAuth] = useState(undefined);
   useEffect(() => {
     (async () => {
