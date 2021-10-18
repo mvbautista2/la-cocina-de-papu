@@ -32,7 +32,7 @@ export default function Auth() {
 const styles = StyleSheet.create({
   logo: {
     width: "100%",
-    height: 50,
+    height: 200,
     resizeMode: "contain",
     marginBottom: 20,
   },
