@@ -7,9 +7,7 @@ import Banner from "../../components/Home/Banner";
 import colors from "../../styles/colors";
 
 export default function Home() {
-  LogBox.ignoreLogs([
-    "Found screens with the same name nested inside one another. Check: home, home > home This can cause confusing behavior during navigation. Consider using unique names for each screen instead.",
-  ]);
+  
   return (
     <>
       <StatusBar backgroundColor={colors.bgDark} barStyle="light-content" />
