@@ -1,17 +1,84 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { useState, useCallback, useEffect } from "react";
+import { StyleSheet, ScrollView, View, Text } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
+import { size } from "lodash";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import StatusBar from "../components/StatusBar";
+import NotProduct from "../components/Cart/NotProduct";
+import ProductList from "../components/Cart/ProductList";
+import AddressList from "../components/Cart/AddressList";
+import Payment from "../components/Cart/Payment";
+import useAuth from "../hooks/useAuth";
+import { getProductCartApi } from "../api/cart";
+import { getAddressesApi } from "../api/address";
+import colors from "../styles/colors";
 
 export default function Cart() {
+  const [cart, setCart] = useState(null);
+  const [products, setProducts] = useState(null);
+  const [reloadCart, setReloadCart] = useState(false);
+  const [addresses, setAddresses] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [totalPayment, setTotalPayment] = useState(null);
+  const { auth } = useAuth();
+
+  useFocusEffect(
+    useCallback(() => {
+      setCart(null);
+      setAddresses(null);
+      setSelectedAddress(null);
+
+      loadCart();
+      loadAddresses();
+    }, [])
+  );
+  useEffect(() => {
+    reloadCart && loadCart();
+    setReloadCart(false);
+  }, [reloadCart]);
+
+  const loadCart = async () => {
+    const response = await getProductCartApi();
+    setCart(response);
+  };
+
+  const loadAddresses = async () => {
+    const response = await getAddressesApi(auth);
+    setAddresses(response);
+  };
   return (
-    <View style={styles.container}>
-      <Text>Estamos en Carrito</Text>
-    </View>
+    <>
+      <StatusBar backgroundColor={colors.bgDark} barStyle="light-content" />
+      {!cart && size(cart) === 0 ? (
+        <NotProduct />
+      ) : (
+        <KeyboardAwareScrollView extraScrollHeight={25}>
+          <ScrollView style={styles.cartContainer}>
+            <ProductList
+              cart={cart}
+              products={products}
+              setProducts={setProducts}
+              setReloadCart={setReloadCart}
+              setTotalPayment={setTotalPayment}
+            />
+            <AddressList
+              addresses={addresses}
+              selectedAddress={selectedAddress}
+              setSelectedAddress={setSelectedAddress}
+            />
+            <Payment
+              totalPayment={totalPayment}
+              products={products}
+              selectedAddress={selectedAddress}
+            />
+          </ScrollView>
+        </KeyboardAwareScrollView>
+      )}
+    </>
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+  cartContainer: {
+    padding: 10,
   },
 });
