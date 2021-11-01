@@ -97,3 +97,40 @@ export async function decreaseProductCartApi(slug) {
     return null;
   }
 }
+
+export async function paymentCartApi(auth, tokenStripe, products, address) {
+  try {
+    const addressShipping = address;
+    delete addressShipping.user;
+    delete addressShipping.createdAt;
+
+    const url = `${API_URL}/orders`;
+    const params = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth.token}`,
+      },
+      body: JSON.stringify({
+        tokenStripe,
+        products,
+        idUser: auth.idUser,
+        addressShipping,
+      }),
+    };
+    const response = await fetch(url, params);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+export async function deleteCartApi() {
+  try {
+    await AsyncStorage.removeItem(CART);
+    return true;
+  } catch (error) {
+    return null;
+  }
+}

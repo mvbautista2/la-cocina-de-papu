@@ -33,6 +33,7 @@
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
     "react-navigation-stack": "react-navigation/stack",
+    "stripe-client": "^1.1.5",
     "yup": "^0.32.9"
   },
   "devDependencies": {

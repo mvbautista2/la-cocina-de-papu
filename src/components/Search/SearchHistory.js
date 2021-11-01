@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   historyItem: {
     paddingVertical: 15,
     paddingHorizontal: 20,
-    borderWidth: 1,
+    borderWidth: 0.2,
     borderTopWidth: 0,
     borderRightWidth: 0,
     borderLeftWidth: 0,

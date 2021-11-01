@@ -13,7 +13,7 @@ export default function NewProduct() {
   }, []);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Nuevos productos</Text>
+      <Text style={styles.title}>Nuestros productos</Text>
       {products && <ListProduct products={products} />}
     </View>
   );
